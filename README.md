@@ -44,11 +44,11 @@ a2enmod setenvif
 ```
 
 * Modify configure file
- * [apache2.conf](apache2.conf)
- * [sites-enabled/001-default.conf](sites-enabled/001-default.conf)
+	* [apache2.conf](apache2.conf)
+	* [sites-enabled/001-default.conf](sites-enabled/001-default.conf)
 
 * Add user authentication(optional)
- * use htpasswd
+	* use htpasswd
 ```bash
 htpasswd -cm file_path user_name
 ```
