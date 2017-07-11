@@ -72,3 +72,27 @@ sudo apt-get install cadaver
 cadaver http://127.0.0.1:8080/webdav/
 ```
 
+## 签发证书，构建HTTPS服务
+
+使用```openssl```工具可以自己签发证书，生成```.pem```和```.key```搭建https服务
+命令
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem
+```
+
+### 生成的证书中包含IP
+
+使用[openssl.cnf](openssl/openssl.cnf)生成证书包含IP命令
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mykey.key -out mycert.pem -config openssl.cnf
+```
+
+### 生成的证书保证机器可信任（添加安全例外）
+
+* 客户端浏览器点击添加例外
+
+* 客户端系统（Ubuntu）添加例外
+使用Ubuntu的```update-ca-certificates```工具添加例外，将想要添加例外的网站```.pem```文件位置（本地文件系统）添加到```/etc/ca-certificates.conf```文件最后，然后运行```update-ca-certificates```命令
+
+* 客户端系统（Centos）添加例外
+使用Centos的```ca-certificates```工具添加例外，将想要添加例外的网站```.pem```文件放到```/etc/pki/ca-trust/source/anchors/```文件夹下，然后运行```update-ca-trust```命令
